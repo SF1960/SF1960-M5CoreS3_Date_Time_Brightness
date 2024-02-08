@@ -32,6 +32,9 @@ String month[12] = {"January","February","March","April","May","June","July","Au
 int width  = 0;                                            // width screen size integers
 int height = 0;                                            // height screen size integers
 
+int battery_Ytext = 9;
+int batteryBars_Yposn = 8;
+
 int batteryLevel = 0;                                      // battery power value
 int batteryCurrent = 0;
 int batteryVoltage = 0;

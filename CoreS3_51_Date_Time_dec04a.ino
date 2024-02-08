@@ -85,11 +85,9 @@ void setup() {
     wifi::connectError();                                  // display error message and restart ESP32
   }
 
-  // Defined in thingProperties.h
-  initProperties();
+  initProperties();                                        // Defined in thingProperties.h
 
-  // Connect to Arduino IoT Cloud
-  ArduinoCloud.begin(ArduinoIoTPreferredConnection);
+  ArduinoCloud.begin(ArduinoIoTPreferredConnection);       // Connect to Arduino IoT Cloud
   
   setDebugMessageLevel(2);                                 // IOT connection debug message level (0 to 4)
   ArduinoCloud.printDebugInfo();                           // print IOT debug connection information
@@ -113,21 +111,20 @@ void loop() {
   batVoltage = batteryVoltage * 0.001;
   batLevel = batteryLevel;
 
-  ArduinoCloud.update();
+  ArduinoCloud.update();                 // update the IOT 
 
+  // display status of IOT connection
   if(ArduinoCloud.connected()){
 
     M5.Lcd.setTextSize(2);
-    M5.Lcd.setTextColor(CYAN);
-    M5.Lcd.drawString("~", 13, 57, 2);
-    M5.Lcd.drawString("~", 100, 57, 2);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.drawString("~", width/2, 5, 2);
 
   } else {
 
     M5.Lcd.setTextSize(2);
     M5.Lcd.setTextColor(BLACK);
-    M5.Lcd.drawString("~", 13, 57, 2);
-    M5.Lcd.drawString("~", 100, 57, 2);
+    M5.Lcd.drawString("~", width/2, 5, 2);
 
   }
 
@@ -136,10 +133,10 @@ void loop() {
   // check screen touch and update brightness if pressed
   int touch = display.getTouchRaw(tp, 3);
 
-  if (touch == 1){
-    chosenBrightness++;
+  if (touch == 1){                                           // screen has been touched
+    chosenBrightness++;                                      // increase variable by 1
     if (chosenBrightness >= 5){
-      chosenBrightness = 0;
+      chosenBrightness = 0;                                  // reset array to position 0
     }
 
     M5.Display.setBrightness(brightness[chosenBrightness]);  // set the screen's brightness
@@ -151,9 +148,9 @@ void loop() {
     
     states::saveBrightness(chosenBrightness);                // save the new brightness value to EEPROM
 
-  }
+  } // (touch == 1)
 
-  // toggle the power display
+  // toggle the power display between level, current and voltage
   unsigned long CurrentPowerMillis = millis();
   if (CurrentPowerMillis - PreviousPowerMillis >= UpdatePower) {
 
@@ -166,7 +163,7 @@ void loop() {
 
     coreS3::displayBattery(PowerToggle);                     // display battery information dependent on value PowerToggle
 
-  }
+  } // powerToggle
 
   // timer for calling second bar display
   unsigned long CurrentMillis = millis();                    // get the system millis()
@@ -180,7 +177,7 @@ void loop() {
     }
     drawSecondBars(seconds);                                 // draw the seconds bar
 
-  }
+  } //second bar
 
 } // loop()
 
@@ -189,11 +186,11 @@ void drawBars(){
 
   // brightness gauge background bars
   for(int i=0; i<=5; i++)
-  M5.Lcd.fillRect(10+(i*6), 9, 4, 12, colorDarkGrey);
+  M5.Lcd.fillRect(10+(i*6), batteryBars_Yposn, 4, 12, colorDarkGrey);
 
   // brightness gauge bars
   for(int i=0; i<chosenBrightness+1; i++)
-  M5.Lcd.fillRect(10+(i*6), 9, 4, 12, colGreen);
+  M5.Lcd.fillRect(10+(i*6), batteryBars_Yposn, 4, 12, colGreen);
 
 } // drawBars()
 
@@ -251,11 +248,7 @@ void flushTime() {
 
 } // flushTime()
 
-
-/*
-  Since ScreenBrightness is READ_WRITE variable, onScreenBrightnessChange() is
-  executed every time a new value is received from IoT Cloud.
-*/
+/* executed every time a new value is received from IoT Cloud. */
 void onScreenBrightnessChange()  {
 
   chosenBrightness = screenBrightness;                     // set global variable to IOT variable value
@@ -267,7 +260,4 @@ void onScreenBrightnessChange()  {
     
   states::saveBrightness(chosenBrightness);                // save the new brightness value to EEPROM
 
-}
-
-
-
+} //onScreenBrightnessChange()

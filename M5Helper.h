@@ -61,19 +61,19 @@ namespace coreS3{
 
     switch (dispPower){   // 1 = Level, 2 = Volts, 3 = Amps
       case 1:
-        M5.Lcd.drawString("Battery Level: ", 245, 11, 1);
-        M5.Lcd.drawFloat(batteryLevel, 0, 295, 11);
-        M5.Lcd.drawString("%", 310, 11, 1);
+        M5.Lcd.drawString("Battery Level: ", 245, battery_Ytext, 1);
+        M5.Lcd.drawFloat(batteryLevel, 0, 295, 10);
+        M5.Lcd.drawString("%", 310, battery_Ytext, 1);
         break;
       case 2:
-        M5.Lcd.drawString("Battery Voltage: ", 230, 11, 1);
-        M5.Lcd.drawFloat(bVolts, 2, 293, 11);
-        M5.Lcd.drawString("V", 310, 11, 1);
+        M5.Lcd.drawString("Battery Voltage: ", 230, battery_Ytext, 1);
+        M5.Lcd.drawFloat(bVolts, 2, 293, battery_Ytext);
+        M5.Lcd.drawString("V", 310, battery_Ytext, 1);
         break;
       case 3:
-        M5.Lcd.drawString("Charge current: ", 230, 11, 1);
-        M5.Lcd.drawFloat(bAmps, 2, 290, 11);
-        M5.Lcd.drawString("mA", 310, 11, 1);
+        M5.Lcd.drawString("Charge current: ", 230, battery_Ytext, 1);
+        M5.Lcd.drawFloat(bAmps, 2, 290, battery_Ytext);
+        M5.Lcd.drawString("mA", 310, battery_Ytext, 1);
         break;
       default:
         break;
