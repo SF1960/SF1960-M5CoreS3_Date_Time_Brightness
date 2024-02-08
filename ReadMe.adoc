@@ -1,0 +1,47 @@
+:Author: ard12sgf1960
+:Email:  sgfpcb@gmail.com
+:Date: 24/09/2023
+:Revision: version# 2.0
+:License: Public Domain
+
+= Project: M5 Core S3 Display
+
+Display date and time obtained from the internt
+Connected also to the Arduino IOT to display battery data
+Ability to control and read display brightness via IOT
+
+== Step 1: Installation
+Connect M5 S3 to computer and download sketch using Arduino App
+
+=== Folder structure
+
+....
+ CoreS3_51_Date_Time_dec04a                => Arduino sketch folder
+  ├── CoreS3_51_Date_Time_dec04a.ino       => main Arduino file
+  ├── M5Helper.h                           => local library for M5
+  ├── WiFiHelper.h                         => local library for WiFiHelper
+  ├── globals.h                            => local library for global variables and constants
+  ├── prefHelper.h                         => local library to read and write to EEPROM
+  ├── soundHelper.h                        => local library to control speaker
+  ├── thingProperties.h                    => Arduino created library file for IOT
+  ├── arduino_secrets.h                    => secret data for WiFI and IOT 
+  └── ReadMe.adoc                          => this file
+....
+
+=== License
+This project is released under a {Public} License.
+
+=== BOM
+Add the bill of the materials you need for this project.
+
+|===
+| ID | Part name         | Part number | Quantity | Website
+| A1 | M5 Core S3        | 1234-abcd   | 1        | https://docs.m5stack.com/en/core/CoreS3
+| A2 | USB Type C cable  | 2345-asdf   | 1        | https://www.amazon.co.uk/USB-Cables/b?ie=UTF8&node=430473031
+|===
+
+
+=== Help
+This document is written in the _AsciiDoc_ format, a markup language to describe documents. 
+If you need help you can search the http://www.methods.co.nz/asciidoc[AsciiDoc homepage]
+or consult the http://powerman.name/doc/asciidoc[AsciiDoc cheatsheet]
